@@ -37,6 +37,39 @@ namespace admin_panel_page_object
             Assert.AreEqual(expectedUrl, loginPage.Url);
         }
 
+        [Test]
+        public void GoToDbPage_WhenCalled_ButtonIsClickedNewPageAppears()
+        {
+            var expectedUrl = "http://thedemosite.co.uk/thedatabase.php";
+            _mainPage.Open();
+            Thread.Sleep(2000);
+            var dbPage = _mainPage.GoToDbPage();
+            
+            Assert.AreEqual(expectedUrl, dbPage.Url);
+        }
+        
+        [Test]
+        public void GoToAddAUserPage_WhenCalled_ButtonIsClickedNewPageAppears()
+        {
+            var expectedUrl = "http://thedemosite.co.uk/addauser.php";
+            _mainPage.Open();
+            Thread.Sleep(2000);
+            var dbPage = _mainPage.GoToAddAUserPage();
+            
+            Assert.AreEqual(expectedUrl, dbPage.Url);
+        }
+        
+        [Test]
+        public void GoToGetYourDbOnlinePage_WhenCalled_ButtonIsClickedNewPageAppears()
+        {
+            var expectedUrl = "http://thedemosite.co.uk/getyourowndbonline.php";
+            _mainPage.Open();
+            Thread.Sleep(2000);
+            var dbPage = _mainPage.GoToGetYourDbOnlinePage();
+            
+            Assert.AreEqual(expectedUrl, dbPage.Url);
+        }
+        
         [TearDown]
         public void Teardown()
         {

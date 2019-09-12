@@ -48,6 +48,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PageObjects\AddAUserPage.cs" />
+    <Compile Include="PageObjects\DatabasePage.cs" />
+    <Compile Include="PageObjects\GetYourDbOnlinePage.cs" />
     <Compile Include="PageObjects\LoginPage.cs" />
     <Compile Include="PageObjects\MainPage.cs" />
     <Compile Include="PageObjects\PageObject.cs" />

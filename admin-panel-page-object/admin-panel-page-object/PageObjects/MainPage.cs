@@ -24,5 +24,29 @@ namespace admin_panel_page_object
             
             return new LoginPage(GetDriver());
         }
+
+        public DatabasePage GoToDbPage()
+        {
+            var theDatabaseButton = FindElement(By.XPath("//*[@href='thedatabase.php']"));
+            theDatabaseButton.Click();
+            
+            return new DatabasePage(GetDriver());
+        }
+
+        public AddAUserPage GoToAddAUserPage()
+        {
+            var addAUserButton = FindElement(By.XPath("//*[@href='addauser.php']"));
+            addAUserButton.Click();
+            
+            return new AddAUserPage(GetDriver());
+        }
+        
+        public GetYourDbOnlinePage GoToGetYourDbOnlinePage()
+        {
+            var addAUserButton = FindElement(By.XPath("//*[@href='getyourowndbonline.php']"));
+            addAUserButton.Click();
+            
+            return new GetYourDbOnlinePage(GetDriver());
+        }
     }
 }
