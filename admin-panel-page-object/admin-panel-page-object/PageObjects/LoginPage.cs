@@ -30,5 +30,10 @@ namespace admin_panel_page_object
         {
             OpenPage(_loginPageUrl);
         }
+
+        public bool IsLoginSuccess()
+        {
+            return PageContainsPhrase("Successful Login");
+        }
     }
 }

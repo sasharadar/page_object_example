@@ -76,31 +76,4 @@ namespace admin_panel_page_object
             _mainPage.Dispose();
         }
     }
-
-    [TestFixture]
-    public class LoginPageTests
-    {
-        private LoginPage _loginPage;
-
-        [SetUp]
-        public void Setup()
-        {
-            _loginPage = new LoginPage(new ChromeDriver());
-        }
-        
-        [Test]
-        public void Open_WhenCalled_PageIsOpened()
-        {
-            var expectedUrl = "http://thedemosite.co.uk/login.php";
-            _loginPage.Open();
-            
-            Assert.AreEqual(expectedUrl, _loginPage.Url);
-        }
-
-        [TearDown]
-        public void Teardown()
-        {
-            _loginPage.Dispose();
-        }
-    }
 }

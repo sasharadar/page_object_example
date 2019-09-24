@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 
 namespace admin_panel_page_object
@@ -37,6 +38,13 @@ namespace admin_panel_page_object
         public void Dispose()
         {
             _driver.Dispose();
+        }
+
+        public bool PageContainsPhrase(string message)
+        {
+            var pageText = _driver.PageSource;
+            var regPattern = string.Join(@".{1,10}", message.Split(' '));
+            return new Regex(regPattern, RegexOptions.Multiline).IsMatch(pageText);
         }
     }
 }
