@@ -36,7 +36,11 @@ namespace admin_panel_page_object
         [Test]
         public void Login_EmptyLogin_ReturnError()
         {
+            _loginPage.Open();
+            _loginPage.InputCredits("", "test");
+            _loginPage.ClickLogin();
             
+            _loginPage.SwitchToAlert();
         }
 
         [Test]
