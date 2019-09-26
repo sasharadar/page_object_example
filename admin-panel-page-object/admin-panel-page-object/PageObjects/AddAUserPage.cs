@@ -4,9 +4,26 @@ namespace admin_panel_page_object
 {
     public class AddAUserPage : PageObject
     {
+        private string _addAUserPageUrl;
+
         public AddAUserPage(IWebDriver driver) : base(driver)
         {
-            
+            _addAUserPageUrl = "http://thedemosite.co.uk/addauser.php";
+        }
+
+        public void Open()
+        {
+            OpenPage(_addAUserPageUrl);
+        }
+        
+        public string GetExistingUsername()
+        {
+            return ExtractTextFromPageCode(@"The username.{1,10}\s", "<br>");
+        }
+        
+        public string GetExistingPassword()
+        {
+            return ExtractTextFromPageCode(@"The password.{1,10}\s", "<br>");
         }
     }
 }

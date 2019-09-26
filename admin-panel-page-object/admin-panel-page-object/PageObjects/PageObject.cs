@@ -1,5 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
+using Microsoft.SqlServer.Server;
 using OpenQA.Selenium;
 
 namespace admin_panel_page_object
@@ -8,6 +9,7 @@ namespace admin_panel_page_object
     {
         private IWebDriver _driver;
         private string _parentWindowHandler;
+        private IAlert _alert;
 
         public string Url
         {
@@ -40,14 +42,42 @@ namespace admin_panel_page_object
         public bool PageContainsPhrase(string message)
         {
             var pageText = _driver.PageSource;
-            var regPattern = string.Join(@".{1,10}", message.Split(' '));
-            return new Regex(regPattern, RegexOptions.Multiline).IsMatch(pageText);
+            return Contains(pageText, message);
         }
 
         public void SwitchToAlert()
         {
-            var alert = _driver.SwitchTo().Alert();
-            var text = alert.Text;
+            _alert = _driver.SwitchTo().Alert();
+        }
+
+        public bool AlertContainsPhrase(string message)
+        {
+            if (_alert == null)
+            {
+                throw new NullReferenceException();
+            }
+            
+            var text = _alert.Text;
+            return Contains(text, message);
+        }
+
+        public void AcceptAlert()
+        {
+            _alert.Accept();
+        }
+
+        public string ExtractTextFromPageCode(string left, string right)
+        {
+            var pageText = _driver.PageSource;
+            var regPattern = $@"{left}(\w+){right}";
+            var match = new Regex(regPattern, RegexOptions.Multiline).Match(pageText);
+            
+            if (match.Groups.Count < 2)
+            {
+                throw new Exception("Can't find text in the Page Text!");
+            }
+            
+            return match.Groups[1].Value; 
         }
 
         public void SwitchToPopup()
@@ -73,6 +103,12 @@ namespace admin_panel_page_object
             
             _driver.SwitchTo().Window(_parentWindowHandler); // switch back to parent window
 
+        }
+
+        private bool Contains(string text, string search)
+        {
+            var regPattern = string.Join(@".{1,10}", search.Split(' '));
+            return new Regex(regPattern, RegexOptions.Multiline).IsMatch(text); 
         }
         
     

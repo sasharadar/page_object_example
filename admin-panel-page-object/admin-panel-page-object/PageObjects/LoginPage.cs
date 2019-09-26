@@ -31,6 +31,20 @@ namespace admin_panel_page_object
             OpenPage(_loginPageUrl);
         }
 
+        public string GetExistingLogin()
+        {
+            var addANewUserPage = new AddAUserPage(GetDriver());
+            addANewUserPage.Open();
+            return addANewUserPage.GetExistingUsername();
+        }
+
+        public string GetExistingPassword()
+        {
+            var addANewUserPage = new AddAUserPage(GetDriver());
+            addANewUserPage.Open();
+            return addANewUserPage.GetExistingPassword();
+        }
+
         public bool IsLoginSuccess()
         {
             return PageContainsPhrase("Successful Login");
