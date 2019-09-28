@@ -17,7 +17,7 @@ namespace admin_panel_page_object
         [Test]
         public void Open_WhenCalled_PageIsOpened()
         {
-            var expectedUrl = "http://thedemosite.co.uk/login.php";
+                var expectedUrl = "http://thedemosite.co.uk/login.php";
             _loginPage.Open();
             
             Assert.AreEqual(expectedUrl, _loginPage.Url);

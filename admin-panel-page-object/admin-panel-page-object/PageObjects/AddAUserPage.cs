@@ -25,5 +25,16 @@ namespace admin_panel_page_object
         {
             return ExtractTextFromPageCode(@"The password.{1,10}\s", "<br>");
         }
+
+        public void CreateNewUser(string login, string password)
+        {
+            var loginField = FindElement(By.XPath("//*[@name='username']"));
+            var passwordField = FindElement(By.XPath("//*[@name='password']"));
+            var saveButton = FindElement(By.XPath("//*[@name='FormsButton2']"));
+        
+            loginField.SendKeys(login);
+            passwordField.SendKeys(password);
+            saveButton.Click();
+        }
     }
 }
